@@ -1,9 +1,14 @@
-const API_BASE = 'http://localhost:3000/api/v1'
+import { buildSearchParamsString } from "./_lib/buildSearchParamsString"
+
+const API_BASE = 'http://localhost:3000/api/v1/messages'
 const TOKEN = 'super-secret-doodle-token'
 
-export async function GET() {
+export async function GET(request: Request) {
+    const { searchParams } = new URL(request.url)
 
-    const res = await fetch(`${API_BASE}/messages`, {
+    const searchParamsString = buildSearchParamsString(searchParams)
+
+    const res = await fetch(`${API_BASE}${searchParamsString}`, {
         headers: {
             Authorization: `Bearer ${TOKEN}`,
         },
