@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 
 const NameModal = ({ setUser }: { setUser: (name: string) => void }) => {
-  const [name, setName] = useState<string>(localStorage.getItem("user") || "");
+
+  const [name, setName] = useState<string>("");
 
   useEffect(() => {
-    const storedName = localStorage.getItem("user");
+    const storedName = sessionStorage.getItem("user");
 
     if (storedName) {
         setUser(storedName);
@@ -13,7 +14,7 @@ const NameModal = ({ setUser }: { setUser: (name: string) => void }) => {
 
   const handleSetUser = (name: string) => {
     if (!name) return;
-    localStorage.setItem("user", name);
+    sessionStorage.setItem("user", name);
     setUser(name);
   };
 

@@ -5,6 +5,7 @@ import MessageFeed from "./components/MessageFeed";
 import { useState } from "react";
 import NameModal from "./components/NameModal";
 import CreateMessageForm from "./components/CreateMessageForm";
+import Loader from "./components/Loader";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -13,6 +14,7 @@ export default function Home() {
 
   const { data, error, isLoading, mutate } = useSWR("/api/messages", fetcher, {
     refreshInterval: 3000,
+    skip: !user,
   });
 
   return (
@@ -22,13 +24,19 @@ export default function Home() {
         <>
           <main className="flex-1 overflow-y-auto w-full">
             <div className=" max-w-screen-sm mx-auto p-6">
-              {isLoading && <div>Loading...</div>}
+              {isLoading && (
+                <Loader />  
+              )}
               {data && <MessageFeed messages={data} currentUser={user} />}
-              {error && <div>Failed to fetch messages</div>}
+              {error && (
+                <div className="flex items-center gap-2 text-sm text-red-400 bg-red-50 border border-red-100 rounded-lg p-3 mx-auto">
+                  Failed to fetch messages
+                </div>
+              )}
             </div>
           </main>
           <footer className="bg-[var(--blue)] w-full">
-            <CreateMessageForm user={user} onSubmit={() => mutate} />
+            <CreateMessageForm user={user} onSubmit={() => mutate()} />
           </footer>
         </>
       )}
