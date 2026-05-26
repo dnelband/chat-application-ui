@@ -41,13 +41,3 @@ The frontend proxies all API requests through Next.js route handlers (`/app/api/
 ```
 Browser → Next.js API route → Chat API backend
 ```
-
-## Network Testing
-
-To test on other devices on the same local network:
-
-```bash
-npm run dev:network
-```
-
-Then access the app via your machine's local IP, e.g. `http://192.168.x.x:3001`.
