@@ -7,7 +7,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function Home() {
   const { data, error, isLoading } = useSWR("/api/messages", fetcher, {
-    refreshInterval: 3000, // polls every 3s
+    refreshInterval: 3000,
   });
 
   return (
