@@ -31,6 +31,11 @@ const CreateMessageForm = ({ user, onSubmit }: { user: string; onSubmit: () => v
             className="w-full border rounded p-2 border-[var(--dark-blue)] bg-white" 
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                sendMessage(message)
+              }
+            }}
           />
           <button className="py-2 px-4 bg-[var(--orange)] text-white rounded cursor-pointer" onClick={() => sendMessage(message)}>
             Send

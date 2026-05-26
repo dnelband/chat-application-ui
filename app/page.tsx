@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen">
-      {!user && <NameModal setAuthor={setUser} />}
+      {!user && <NameModal setUser={setUser} />}
       {user && (
         <>
           <main className="flex-1 overflow-y-auto w-full">

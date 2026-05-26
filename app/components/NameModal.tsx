@@ -1,7 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const NameModal = ({ setAuthor }: { setAuthor: (name: string) => void }) => {
-  const [name, setName] = useState<string>("");
+const NameModal = ({ setUser }: { setUser: (name: string) => void }) => {
+  const [name, setName] = useState<string>(localStorage.getItem("user") || "");
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("user");
+
+    if (storedName) {
+        setUser(storedName);
+    }
+  }, []);
+
+  const handleSetUser = (name: string) => {
+    if (!name) return;
+    localStorage.setItem("user", name);
+    setUser(name);
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50">
       <div className="bg-white rounded-xl p-6 w-full max-w-sm mx-4 shadow-xl">
@@ -11,16 +26,19 @@ const NameModal = ({ setAuthor }: { setAuthor: (name: string) => void }) => {
           type="text"
           placeholder="Your name"
           className="w-full border border-gray-200 rounded-lg px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--orange)]"
-          id="name-input"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSetUser(name);
+            }
+          }}
         />
         <button
           className="w-full bg-[var(--orange)] text-white rounded-lg px-4 py-2 font-medium cursor-pointer"
+          disabled={!name}
           onClick={() => {
-            if (name) {
-              setAuthor(name);
-            }
+              handleSetUser(name);
           }}
         >
           Join
