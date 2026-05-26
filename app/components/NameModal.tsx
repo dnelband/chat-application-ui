@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const NameModal = ({ setUser }: { setUser: (name: string) => void }) => {
-
+  
   const [name, setName] = useState<string>("");
 
   useEffect(() => {
