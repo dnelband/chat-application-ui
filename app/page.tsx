@@ -1,10 +1,22 @@
-import BackgroundImage from '../public/body_bg.png';
+"use client";
+
+import useSWR from "swr";
+import MessageFeed from "./components/MessageFeed";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 export default function Home() {
+  const { data, error, isLoading } = useSWR("/api/messages", fetcher, {
+    refreshInterval: 3000, // polls every 3s
+  });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-contain bg-repeat">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-left justify-between">
-        <p>HELLO</p>
+    <div className="flex flex-col flex-1 items-center justify-center">
+      <main className="flex flex-1 w-full max-w-screen-sm p-6 flex-col">
+        {isLoading && <div>Loading...</div>}
+        {data && <MessageFeed messages={data} />}
+        {error && <div>Something went wrong</div>}
       </main>
     </div>
   );
-  }
+}

@@ -1,5 +1,5 @@
+import { SearchParams } from "@/app/types"
 
-export type SearchParams = 'after' | 'before' | 'limit'
 const optionalSearchParams: SearchParams[] = ['after', 'before', 'limit']
 
 export const buildSearchParamsString = (searchParams: URLSearchParams) => {
