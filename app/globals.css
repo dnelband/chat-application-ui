@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --footer-background: rgb(54 152 212);
-  --footer-border: rgb(46 119 164);
-  --button-background: rgb(255 135 109);
+  --blue: rgb(54 152 212);
+  --dark-blue: rgb(46 119 164);
+  --orange: rgb(255 135 109);
+  --yellow: rgb(252 246 197)
+
 }
 
 body {
