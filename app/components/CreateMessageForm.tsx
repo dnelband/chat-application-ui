@@ -19,7 +19,6 @@ const CreateMessageForm = ({
       },
       body: JSON.stringify({ message, author: user }),
     });
-    // ADD ERROR HANDLING
     if (!res.ok) {
       setError("Failed to send message");
       return;

@@ -1,5 +1,6 @@
 import { Message } from "@/app/types";
 import { format } from "date-fns";
+import { useEffect, useRef } from "react";
 
 const decodeHtml = (str: string) => {
   const txt = document.createElement("textarea");
@@ -14,6 +15,11 @@ const MessageFeed = ({
   messages: Message[];
   currentUser: string;
 }) => {
+
+const bottomRef = useRef<HTMLDivElement>(null)
+useEffect(() => {
+  bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+}, [messages]) 
 
   return (
     <>
@@ -41,6 +47,7 @@ const MessageFeed = ({
           No messages yet
         </div>
       )}
+      <div ref={bottomRef} />
     </>
   );
 };
