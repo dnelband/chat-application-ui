@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Chat Frontend
+
+A simple real-time chat interface built with Next.js and TypeScript for the Doodle frontend challenge.
+
+## Tech Stack
+
+- **Next.js 16** with App Router
+- **TypeScript**
+- **Tailwind CSS**
+- **SWR** for data fetching and polling
 
 ## Getting Started
 
-First, run the development server:
+### 1. Set up the backend
+
+This app requires the [Chat API](https://github.com/DoodleScheduling/frontend-challenge-chat-api) running locally. Follow the setup instructions in that repository — it runs on port `3000` by default.
+
+### 2. Configure environment variables
+
+```bash
+cp .env.example .env.local
+```
+
+| Variable | Default | Description |
+|---|---|---|
+| `CHAT_API_BASE` | `http://localhost:3000/api/v1` | Backend API base URL |
+| `CHAT_API_TOKEN` | `super-secret-doodle-token` | Bearer token for API auth |
+
+### 3. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The frontend proxies all API requests through Next.js route handlers (`/app/api/messages`), keeping the bearer token server-side and out of the browser.
 
-## Learn More
+```
+Browser → Next.js API route → Chat API backend
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Network Testing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To test on other devices on the same local network:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run dev:network
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Then access the app via your machine's local IP, e.g. `http://192.168.x.x:3001`.

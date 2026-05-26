@@ -27,7 +27,7 @@ export default function Home() {
               {isLoading && (
                 <Loader />  
               )}
-              {data && <MessageFeed messages={data} currentUser={user} />}
+              {data?.messages && <MessageFeed messages={data.messages} currentUser={user} />}
               {error && (
                 <div className="flex items-center gap-2 text-sm text-red-400 bg-red-50 border border-red-100 rounded-lg p-3 mx-auto">
                   Failed to fetch messages

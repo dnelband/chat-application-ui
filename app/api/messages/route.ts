@@ -1,14 +1,14 @@
 import { buildSearchParamsString } from "./_lib/buildSearchParamsString"
 
-const API_BASE = 'http://localhost:3000/api/v1/messages'
-const TOKEN = 'super-secret-doodle-token'
+const API_BASE = process.env.API_BASE ?? 'http://localhost:3000'
+const TOKEN = process.env.API_TOKEN ?? 'super-secret-doodle-token'
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
 
     const searchParamsString = buildSearchParamsString(searchParams)
 
-    const res = await fetch(`${API_BASE}${searchParamsString}`, {
+    const res = await fetch(`${API_BASE}/api/v1/messages${searchParamsString}`, {
         headers: {
             Authorization: `Bearer ${TOKEN}`,
         },
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
     const body = await request.json()
 
-    const res = await fetch(API_BASE, {
+    const res = await fetch(`${API_BASE}/api/v1/messages`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -30,6 +30,6 @@ export async function POST(request: Request) {
         body: JSON.stringify(body),
     })
 
-    const data = await res.json()   
+    const data = await res.json()
     return Response.json(data, { status: res.status })
 }
