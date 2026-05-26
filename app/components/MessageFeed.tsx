@@ -10,7 +10,12 @@ const decodeHtml = (str: string) => {
 const MessageFeed = ({ messages, currentUser }: { messages: Message[]; currentUser: string }) => {
   return (
     <>
-      {messages.map((message, index) => {
+    {!messages && (
+      <div className="flex items-center gap-2 text-sm text-gray-400 bg-gray-50 border border-gray-200 rounded-lg p-3 mx-auto">
+        No messages yet
+      </div>
+    )}
+      {messages && messages.map((message, index) => {
         const previousAuthor = index > 0 ? messages[index - 1].author : null;
         const isAuthor = message.author === currentUser
         const isPreviousAuthor = previousAuthor === currentUser

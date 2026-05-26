@@ -1,7 +1,7 @@
 import { buildSearchParamsString } from "./_lib/buildSearchParamsString"
 
 const API_BASE = process.env.API_BASE ?? 'http://localhost:3000'
-const TOKEN = process.env.API_TOKEN ?? 'super-secret-doodle-token'
+const TOKEN = process.env.API_TOKEN
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
