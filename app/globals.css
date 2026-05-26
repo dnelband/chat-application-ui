@@ -1,4 +1,11 @@
 @import "tailwindcss";
+
+:root {
+  --footer-background: rgb(54 152 212);
+  --footer-border: rgb(46 119 164);
+  --button-background: rgb(255 135 109);
+}
+
 body {
   background-image: url('/body_bg.png');
   background-repeat: repeat;

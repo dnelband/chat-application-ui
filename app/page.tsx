@@ -2,6 +2,7 @@
 
 import useSWR from "swr";
 import MessageFeed from "./components/MessageFeed";
+import Footer from "./components/Footer";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -11,12 +12,15 @@ export default function Home() {
   });
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center">
-      <main className="flex flex-1 w-full max-w-screen-sm p-6 flex-col">
-        {isLoading && <div>Loading...</div>}
-        {data && <MessageFeed messages={data} />}
-        {error && <div>Something went wrong</div>}
+    <div className="flex flex-col h-screen">
+      <main className="flex-1 overflow-y-auto w-full">
+        <div className=" max-w-screen-sm mx-auto p-6">
+          {isLoading && <div>Loading...</div>}
+          {data && <MessageFeed messages={data} />}
+          {error && <div>Failed to fetch messages</div>}
+        </div>
       </main>
+      <Footer />
     </div>
   );
 }
