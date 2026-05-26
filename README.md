@@ -26,6 +26,12 @@ cp .env.example .env.local
 | `CHAT_API_BASE` | `http://localhost:3000/api/v1` | Backend API base URL |
 | `CHAT_API_TOKEN` | `super-secret-doodle-token` | Bearer token for API auth |
 
+### 3. Run NPM Install
+
+```bash
+npm install
+```
+
 ### 3. Run the development server
 
 ```bash
